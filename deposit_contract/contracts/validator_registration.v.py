@@ -86,7 +86,7 @@ def deposit(deposit_input: bytes[512]):
     if msg.value == as_wei_value(MAX_DEPOSIT_AMOUNT, "gwei"):
         self.full_deposit_count += 1
         if self.full_deposit_count == CHAIN_START_FULL_DEPOSIT_THRESHOLD:
-            timestamp_day_boundary: uint256 = as_unitless_number(block.timestamp) - as_unitless_number(block.timestamp) % SECONDS_PER_DAY + SECONDS_PER_DAY
+            timestamp_day_boundary: uint256 = as_unitless_number(block.timestamp) - as_unitless_number(block.timestamp) % SECONDS_PER_DAY + 2*SECONDS_PER_DAY
             chainstart_time: bytes[8] = self.to_little_endian_64(timestamp_day_boundary)
             log.ChainStart(new_deposit_root, chainstart_time)
             self.chainStarted = True
